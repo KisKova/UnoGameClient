@@ -19,7 +19,8 @@
         v-if="view === 'lobby'"
         @game-started="handleGameStarted"
     />
-    <Gameboard v-if="view === 'gameboard'" />
+    <Gameboard v-if="view === 'gameboard'" @game-ended="handleGameEnded" />
+    <GameOver v-if="view === 'gameover'" :winner="gameWinner" />
   </div>
 </template>
 
@@ -31,7 +32,7 @@ import Lobby from './components/Lobby.vue';
 import Gameboard from './components/Gameboard.vue';
 
 // State for managing views
-const view = ref<'create' | 'join' | 'lobby' | 'gameboard'>('create');
+const view = ref<'create' | 'join' | 'lobby' | 'gameboard'| 'gameover'>('create');
 const inGame = ref(false);
 
 // Handlers
@@ -50,6 +51,14 @@ const handleGameJoined = () => {
 const handleGameStarted = () => {
   console.log('Game started! Transitioning to gameboard.');
   view.value = 'gameboard';
+};
+
+const gameWinner = ref<string>(''); // Track the overall game winner
+
+const handleGameEnded = (data: { winner: string }) => {
+  console.log('Game Over:', data);
+  gameWinner.value = data.winner; // Store the winner's name
+  view.value = 'gameover'; // Transition to the GameOver view
 };
 </script>
 
