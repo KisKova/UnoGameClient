@@ -2,7 +2,7 @@
   <div class="game-board">
     <h1 class="title">UNO Game Board</h1>
 
-    <!-- Scoreboard -->
+    <!--Scoreboard-->
     <div class="scoreboard">
       <h2>Scoreboard</h2>
       <table>
